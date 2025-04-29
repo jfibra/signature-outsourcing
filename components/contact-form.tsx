@@ -14,6 +14,7 @@ export default function ContactForm() {
     staffCount: "",
     message: "",
     marketing: false,
+    outsourcingInterest: false,
   })
 
   const handleChange = (e) => {
@@ -29,6 +30,18 @@ export default function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(formData)
+
+    // Here you would typically send the form data to your backend
+    // For example, using fetch or axios to send to an API endpoint
+    // that would then email the request to info@signatureoutsourcing.com
+
+    // Example of what this might look like:
+    // fetch('/api/contact', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(formData)
+    // })
+
     alert("Form submitted! We'll be in touch soon.")
   }
 
@@ -128,19 +141,37 @@ export default function ContactForm() {
           onChange={handleChange}
           className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0a2642] min-h-[100px]"
         ></textarea>
-        <div className="flex items-start">
-          <input
-            type="checkbox"
-            id="marketing"
-            name="marketing"
-            checked={formData.marketing}
-            onChange={handleCheckboxChange}
-            className="mt-1 mr-2"
-          />
-          <label htmlFor="marketing" className="text-sm text-[#0a2642]">
-            Yes, I would like to receive marketing communications from Signature Outsourcing.
-          </label>
+
+        <div className="space-y-3">
+          <div className="flex items-start">
+            <input
+              type="checkbox"
+              id="outsourcingInterest"
+              name="outsourcingInterest"
+              checked={formData.outsourcingInterest}
+              onChange={handleCheckboxChange}
+              className="mt-1 mr-2"
+            />
+            <label htmlFor="outsourcingInterest" className="text-sm text-[#0a2642]">
+              I want to be contacted about outsourcing staff in from Signature Outsourcing.
+            </label>
+          </div>
+
+          <div className="flex items-start">
+            <input
+              type="checkbox"
+              id="marketing"
+              name="marketing"
+              checked={formData.marketing}
+              onChange={handleCheckboxChange}
+              className="mt-1 mr-2"
+            />
+            <label htmlFor="marketing" className="text-sm text-[#0a2642]">
+              Yes, I would like to receive marketing communications from Signature Outsourcing.
+            </label>
+          </div>
         </div>
+
         <p className="text-xs text-[#0a2642]">
           By clicking "Contact Us" you are agreeing to the Signature Outsourcing Data{" "}
           <ScrollToTopLink href="/privacy-policy" className="underline">

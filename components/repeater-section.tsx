@@ -83,7 +83,7 @@ function RepeaterItem({ item, index }) {
           <span className="text-[#00c2ff]">{item.heading.split(" ").slice(-1)}</span>
         </motion.h3>
         <motion.p
-          className="text-gray-600 mb-6"
+          className="text-gray-600 mb-6 text-justify"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.3 }}

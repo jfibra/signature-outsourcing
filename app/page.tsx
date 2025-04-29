@@ -10,9 +10,6 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Benefits Section */}
-      <BenefitsSection />
-
       {/* Repeater Section */}
       <RepeaterSection />
 
