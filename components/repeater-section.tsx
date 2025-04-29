@@ -37,9 +37,11 @@ export default function RepeaterSection() {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        {repeaterItems.map((item, index) => (
-          <RepeaterItem key={index} item={item} index={index} />
-        ))}
+        <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-lg p-8">
+          {repeaterItems.map((item, index) => (
+            <RepeaterItem key={index} item={item} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   )
