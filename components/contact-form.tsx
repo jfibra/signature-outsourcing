@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import ScrollToTopLink from "./scroll-to-top-link"
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -172,13 +171,6 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <p className="text-xs text-[#0a2642]">
-          By clicking "Contact Us" you are agreeing to the Signature Outsourcing Data{" "}
-          <ScrollToTopLink href="/privacy-policy" className="underline">
-            Privacy Policy
-          </ScrollToTopLink>
-          .
-        </p>
         <button
           type="submit"
           className="w-full bg-[#0a2642] text-white font-medium rounded-full py-3 hover:bg-[#0a3a6a] transition duration-300"
