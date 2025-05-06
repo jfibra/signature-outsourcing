@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef } from "react"
-import Image from "next/image"
 import { motion, useInView } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import ScrollToTopLink from "./scroll-to-top-link"
@@ -11,7 +10,7 @@ export default function HeroSection() {
   const isInView = useInView(ref, { once: true })
 
   return (
-    <section className="bg-[#0a2642] text-white pt-16 pb-24 relative overflow-hidden" ref={ref}>
+    <section className="bg-[#0a2642] text-white relative overflow-hidden" ref={ref}>
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a2642] to-[#0d3a6b] z-0"></div>
 
@@ -62,13 +61,17 @@ export default function HeroSection() {
         >
           <div className="relative">
             <div className="absolute -inset-4 bg-[#00c2ff] opacity-10 rounded-full blur-xl"></div>
-            <Image
-              src="/conversation-bubbles.png"
-              alt="Remote team collaboration"
-              width={500}
-              height={500}
-              className="w-full relative z-10"
-            />
+            <div className="flex justify-center">
+              <img
+                alt="Remote team collaboration"
+                loading="lazy"
+                decoding="async"
+                data-nimg="1"
+                className="relative z-10"
+                src="/hero-section-transparent.png"
+                style={{ color: "transparent", width: "70%" }}
+              />
+            </div>
           </div>
         </motion.div>
       </div>

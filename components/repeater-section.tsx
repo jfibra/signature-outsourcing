@@ -8,7 +8,7 @@ import ScrollToTopLink from "./scroll-to-top-link"
 
 const repeaterItems = [
   {
-    image: "/money-transfer.png",
+    image: "/civil-enginner-piggy-bank-featured-transparent.png",
     subHeading: "Reduce costs",
     heading: "Save up to 75%",
     description:
@@ -16,7 +16,7 @@ const repeaterItems = [
     link: "/how-it-works/",
   },
   {
-    image: "/web-development.png",
+    image: "/engineer-basketball-transparent2.png",
     subHeading: "Scale quickly",
     heading: "Access to Superior talent",
     description:
@@ -24,7 +24,7 @@ const repeaterItems = [
     link: "/how-it-works/recruitment-services/",
   },
   {
-    image: "/remote-learning.png",
+    image: "/engineer-island-transparent2.png",
     subHeading: "Increased efficiency",
     heading: "Dedicated Offshore Staff",
     description:
