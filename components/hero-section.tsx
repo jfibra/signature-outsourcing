@@ -10,7 +10,7 @@ export default function HeroSection() {
   const isInView = useInView(ref, { once: true })
 
   return (
-    <section className="bg-[#0a2642] text-white relative overflow-hidden" ref={ref}>
+    <section className="bg-[#0a2642] text-white relative overflow-hidden pt-12 md:pt-0" ref={ref}>
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a2642] to-[#0d3a6b] z-0"></div>
 
