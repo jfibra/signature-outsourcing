@@ -12,11 +12,8 @@ export default function ProjectEngineersPage() {
             <Link href="/" className="hover:text-[#00c2ff]">
               Home
             </Link>{" "}
-            /{" "}
-            <Link href="/services/staffing-categories/" className="hover:text-[#00c2ff]">
-              Staffing Categories
-            </Link>{" "}
-            / <span className="text-gray-700">Project Engineers</span>
+            / <span className="text-gray-700">Staffing Categories</span> /{" "}
+            <span className="text-gray-700">Project Engineers</span>
           </div>
         </div>
       </div>

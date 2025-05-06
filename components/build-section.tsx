@@ -28,7 +28,7 @@ export default function BuildSection() {
             </h2>
             <div>
               <ScrollToTopLink
-                href="/request-quote/"
+                href="/how-it-works"
                 className="inline-block bg-[#ff0099] text-white font-medium rounded-full px-6 py-3 hover:bg-[#e02e5a] transition duration-300 shadow-md hover:shadow-lg"
               >
                 Get a quote

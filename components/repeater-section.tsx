@@ -21,7 +21,7 @@ const repeaterItems = [
     heading: "Access to Superior talent",
     description:
       "With Signature Outsourcing Solutions, you can scale your organisation quickly, easily, and cost-effectively. Our AI-enhanced recruitment process and dedicated support team help you build a custom-fit offshore team, made up of the top 1% of talent in the Philippines.",
-    link: "/how-it-works/recruitment-services/",
+    link: "/how-it-works/",
   },
   {
     image: "/engineer-island-transparent2.png",

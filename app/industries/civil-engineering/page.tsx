@@ -12,7 +12,9 @@ export default function CivilEngineeringPage() {
           <div className="text-sm text-gray-500">
             <Link href="/" className="hover:text-[#00c2ff]">
               Home
-            </Link>
+            </Link>{" "}
+            / <span className="text-gray-700">Industries</span> /{" "}
+            <span className="text-gray-700">Civil Engineering</span>
           </div>
         </div>
       </div>

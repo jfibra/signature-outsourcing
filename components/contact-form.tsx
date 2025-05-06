@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Swal from "sweetalert2"
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -34,14 +35,28 @@ export default function ContactForm() {
     // For example, using fetch or axios to send to an API endpoint
     // that would then email the request to info@signatureoutsourcing.com
 
-    // Example of what this might look like:
-    // fetch('/api/contact', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData)
-    // })
+    // Show success message with SweetAlert
+    Swal.fire({
+      title: "Thank you!",
+      text: "We've received your information and will contact you within a few days.",
+      icon: "success",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#00c2ff",
+    })
 
-    alert("Form submitted! We'll be in touch soon.")
+    // Reset form
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      location: "",
+      company: "",
+      staffCount: "",
+      message: "",
+      marketing: false,
+      outsourcingInterest: false,
+    })
   }
 
   return (
