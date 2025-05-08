@@ -59,7 +59,7 @@ export default function AboutUsPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="max-w-3xl mx-auto">
+          <div id="contact-form" className="max-w-3xl mx-auto" tabIndex={-1}>
             <ContactForm />
           </div>
         </div>

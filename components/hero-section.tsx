@@ -43,6 +43,7 @@ export default function HeroSection() {
           >
             <ScrollToTopLink
               href="/about-us"
+              focusId="contact-form"
               className="group bg-[#00c2ff] text-[#0a2642] font-medium rounded-full px-6 py-3 inline-flex items-center hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Start building your team

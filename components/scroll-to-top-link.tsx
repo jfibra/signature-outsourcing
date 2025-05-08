@@ -12,9 +12,17 @@ interface ScrollToTopLinkProps {
   className?: string
   ariaLabel?: string
   target?: string
+  focusId?: string
 }
 
-export default function ScrollToTopLink({ href, children, className, ariaLabel, target }: ScrollToTopLinkProps) {
+export default function ScrollToTopLink({
+  href,
+  children,
+  className,
+  ariaLabel,
+  target,
+  focusId,
+}: ScrollToTopLinkProps) {
   const router = useRouter()
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -34,6 +42,18 @@ export default function ScrollToTopLink({ href, children, className, ariaLabel, 
     // Navigate after a short delay to allow the scroll to complete
     setTimeout(() => {
       router.push(href)
+
+      // If a focusId is provided, scroll to that element after navigation
+      if (focusId) {
+        setTimeout(() => {
+          const element = document.getElementById(focusId)
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" })
+            // Optional: focus the element for accessibility
+            element.focus({ preventScroll: true })
+          }
+        }, 500) // Give the page time to load
+      }
     }, 300)
   }
 
