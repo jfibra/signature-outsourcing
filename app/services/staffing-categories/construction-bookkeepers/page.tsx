@@ -26,8 +26,8 @@ export default function ConstructionBookkeepersPage() {
 
           <div className="mb-8">
             <Image
-              src="https://img.freepik.com/free-photo/working-housing-project_1098-17511.jpg?ga=GA1.1.1085061816.1743815774&semt=ais_hybrid&w=740"
-              alt="Construction Bookkeeper working on housing project"
+              src="/Construction Bookkeepers.jpg"
+              alt="Construction Bookkeeper working at computer"
               width={800}
               height={500}
               className="rounded-lg shadow-md w-full"

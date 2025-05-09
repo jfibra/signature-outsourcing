@@ -8,25 +8,25 @@ import ScrollToTopLink from "./scroll-to-top-link"
 const steps = [
   {
     number: 1,
-    icon: "/checklist-manager.png",
+    icon: "/You provide us with a job description.png",
     title: "You provide us with a job description",
     description: "Just tell us what you need",
   },
   {
     number: 2,
-    icon: "/business-meeting.png",
+    icon: "/We recruit talented professionals.png",
     title: "We recruit talented professionals",
     description: "Only the best. Quality assured",
   },
   {
     number: 3,
-    icon: "/puzzle-innovation.png",
+    icon: "/Your dedicated staff report to you daily.png",
     title: "Your dedicated staff report to you daily",
     description: "Full time remote or office-based",
   },
   {
     number: 4,
-    icon: "/security-protection.png",
+    icon: "/We manage the operations.png",
     title: "We manage the operations",
     description: "And ensure quality standards",
   },

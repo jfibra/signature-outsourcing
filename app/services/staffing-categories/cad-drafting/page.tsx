@@ -26,8 +26,8 @@ export default function CADDraftersPage() {
 
           <div className="mb-8">
             <Image
-              src="https://img.freepik.com/free-photo/3d-graphic-artists-sketching-mechanical-asset-using-advanced-software-technology-modeling-expert-optimising-polygon-count-geometry-mesh-order-improve-visual-quality_482257-42941.jpg?ga=GA1.1.1085061816.1743815774&semt=ais_hybrid&w=740"
-              alt="CAD Designer working on 3D model"
+              src="/CAD Drafters & Designers.jpg"
+              alt="CAD Designer working on blueprints"
               width={800}
               height={500}
               className="rounded-lg shadow-md w-full"
