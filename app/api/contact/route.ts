@@ -12,6 +12,11 @@ export async function POST(request: NextRequest) {
   try {
     console.log("API route called")
 
+    // Debug environment variables
+    console.log("Environment check:")
+    console.log("NODE_ENV:", process.env.NODE_ENV)
+    console.log("Resend exists:", !!process.env.Resend)
+
     // Parse request body
     let body
     try {
@@ -60,10 +65,11 @@ export async function POST(request: NextRequest) {
     console.log(JSON.stringify(submissionData, null, 2))
     console.log("===============================")
 
-    // Check if Resend is available
-    if (!process.env.RESEND) {
-      console.log("RESEND environment variable not found - form data logged above")
+    // Check if Resend is available - try with correct case "Resend"
+    const resendKey = process.env.Resend || process.env.RESEND || process.env.RESEND_API_KEY
 
+    if (!resendKey) {
+      console.log("Resend environment variable not found in any form")
       return NextResponse.json(
         {
           success: true,
@@ -75,12 +81,16 @@ export async function POST(request: NextRequest) {
 
     // Try to send email with Resend if available
     try {
-      const { Resend } = await import("resend")
-      const resend = new Resend(process.env.RESEND)
+      console.log("Resend key found, attempting to import and use Resend...")
 
+      const { Resend } = await import("resend")
+      const resend = new Resend(resendKey)
+
+      // Add both the main recipient and CC the submitter's email
       const emailData = {
         from: "Signature Outsourcing <onboarding@resend.dev>",
-        to: ["info@signatureoutsourcing.com"], // Changed to Signature Outsourcing email
+        to: ["info@signatureoutsourcing.com"],
+        cc: [email], // CC the person who submitted the form
         replyTo: email,
         subject: `🏗️ New Contact: ${firstName} ${lastName} from ${company}`,
         html: `
@@ -91,34 +101,15 @@ export async function POST(request: NextRequest) {
             </div>
             
             <div style="background: white; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #00c2ff;">
-                  <label style="font-weight: 600; color: #0a2642; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block;">First Name</label>
-                  <div style="color: #555; font-size: 16px;">${firstName}</div>
-                </div>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #00c2ff;">
-                  <label style="font-weight: 600; color: #0a2642; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block;">Last Name</label>
-                  <div style="color: #555; font-size: 16px;">${lastName}</div>
-                </div>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #00c2ff;">
-                  <label style="font-weight: 600; color: #0a2642; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block;">Email</label>
-                  <div style="color: #555; font-size: 16px;">${email}</div>
-                </div>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #00c2ff;">
-                  <label style="font-weight: 600; color: #0a2642; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block;">Phone</label>
-                  <div style="color: #555; font-size: 16px;">${phone}</div>
-                </div>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #00c2ff;">
-                  <label style="font-weight: 600; color: #0a2642; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block;">Location</label>
-                  <div style="color: #555; font-size: 16px;">${location}</div>
-                </div>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #00c2ff;">
-                  <label style="font-weight: 600; color: #0a2642; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block;">Company</label>
-                  <div style="color: #555; font-size: 16px;">${company}</div>
-                </div>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #00c2ff; grid-column: 1 / -1;">
-                  <label style="font-weight: 600; color: #0a2642; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block;">Staff Count</label>
-                  <div style="color: #555; font-size: 16px;">${staffCount}</div>
+              <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #00c2ff; margin-bottom: 15px;">
+                <label style="font-weight: 600; color: #0a2642; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; display: block;">Contact Information</label>
+                <div style="color: #555; font-size: 16px;">
+                  <strong>Name:</strong> ${firstName} ${lastName}<br>
+                  <strong>Email:</strong> ${email}<br>
+                  <strong>Phone:</strong> ${phone}<br>
+                  <strong>Location:</strong> ${location}<br>
+                  <strong>Company:</strong> ${company}<br>
+                  <strong>Staff Count:</strong> ${staffCount}
                 </div>
               </div>
 
@@ -161,27 +152,40 @@ export async function POST(request: NextRequest) {
         `,
       }
 
-      console.log("Attempting to send email to info@signatureoutsourcing.com...")
+      console.log("Attempting to send email to info@signatureoutsourcing.com with CC to submitter...")
+      console.log("Email data prepared, calling resend.emails.send...")
+
       const { data, error } = await resend.emails.send(emailData)
 
       if (error) {
-        console.error("Resend error:", error)
-        throw new Error(error.message)
+        console.error("Resend API error:", error)
+        console.error("Error details:", JSON.stringify(error, null, 2))
+        throw new Error(`Resend API error: ${error.message || JSON.stringify(error)}`)
       }
 
-      console.log("Email sent successfully:", data)
-      return NextResponse.json(
-        { success: true, message: "Thank you! Your message has been sent successfully." },
-        { status: 200, headers },
-      )
-    } catch (emailError) {
-      console.error("Email sending failed:", emailError)
+      console.log("Email sent successfully!")
+      console.log("Resend response data:", JSON.stringify(data, null, 2))
 
       return NextResponse.json(
         {
           success: true,
           message:
+            "Thank you! Your message has been sent successfully. You'll also receive a copy of this submission at your email address.",
+          emailId: data.id,
+        },
+        { status: 200, headers },
+      )
+    } catch (emailError) {
+      console.error("Email sending failed with error:", emailError)
+      console.error("Error stack:", emailError.stack)
+
+      // Still return success but indicate email issue
+      return NextResponse.json(
+        {
+          success: true,
+          message:
             "Form submitted successfully! Your information has been received (email service temporarily unavailable).",
+          debug: emailError.message,
         },
         { status: 200, headers },
       )
